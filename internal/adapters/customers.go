@@ -41,7 +41,7 @@ func (c *CustomersRepository) SaveCustomer(customer domain.Customer) (*domain.Cu
 		return nil, fmt.Errorf("error connecting to DB: %v", err)
 	}
 
-	_, err = dbConnection.NamedExec("INSERT INTO customer(user_dni, name, last_name, phone, email, points_collected, cashback_collected) VALUES(:user_dni, :name, :lastName, :phone, :email, :points_collected, :cashback_collected)", &customer)
+	_, err = dbConnection.NamedExec("INSERT INTO customer(user_dni, name, last_name, phone, email, points_collected, cashback_collected) VALUES(:user_dni, :name, :last_name, :phone, :email, :points_collected, :cashback_collected)", &customer)
 
 	if err != nil {
 		return nil, fmt.Errorf("error inserting data: %v", err)
