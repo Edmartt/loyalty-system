@@ -46,6 +46,20 @@ func (c *CampaignRepository) ReadCommerceCampaign(id string) (*domain.CommerceCa
 	return &result, nil
 }
 
-func (c *CampaignRepository) ReadBranchCampaign(id string) (*domain.Branch, error) {
+func (c *CampaignRepository) ReadBranchCampaign(id string) (*domain.BranchCampaign, error) {
 
+	dbConnection, err := c.dbConnection.GetConnection()
+
+	if err != nil {
+		return nil, fmt.Errorf("error connecting to db: %v", err)
+	}
+
+	var result domain.BranchCampaign
+
+	err = dbConnection.Get(result, "SELECT c.id AS campaign_id, c.campaign_name, c.campaign_multiplier, c.campaign_percent_bonus, c.start_date, c.end_date, b.id AS branch_id, b.address AS branch_address, co.id AS commerce_id, co.name AS commerce_name, co.points_x_buy, co.value_x_point, co.created_at FROM campaign c JOIN branch b ON c.branch_id = b.id JOIN commerce co ON c.commerce_id = co.id WHERE b.id = ? ", id)
+
+	if err != nil {
+		return nil, fmt.Errorf("error fetching campaign data: %v", err)
+	}
+	return &result, nil
 }
