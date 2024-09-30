@@ -21,3 +21,15 @@ func (c *CommerceService) GetCommerceCampaign(campaignID string) (*domain.Campai
 func (c *CommerceService) SetCommerceCampaign(campaign domain.Campaign) (*domain.Campaign, error) {
 	return c.campaignRepository.SaveCampaign(campaign)
 }
+
+func (c *CommerceService) GetCommercePointsXBuy(id string) (*domain.Commerce, error) {
+	return c.commerceRepository.ReadPointsXBuy(id)
+}
+
+func (c *CommerceService) SetCommercePointsXBuy(id string, commercePoint int32) (string, error) {
+	return c.commerceRepository.SavePointsXBuy(id, commercePoint)
+}
+
+func (c *CommerceService) SetCommerceValueXPoint(id string, money int64) (string, error) {
+	return c.commerceRepository.SaveValueXPoint(id, money)
+}
