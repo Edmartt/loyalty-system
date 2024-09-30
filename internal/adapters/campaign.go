@@ -26,6 +26,10 @@ func (c *CampaignRepository) SaveCampaign(campaign domain.Campaign) (*domain.Cam
 
 	_, err = dbConnection.NamedExec("INSERT INTO campaign(commerce_id, branch_id, campaign_name, campaign_type, campaign_multiplier, campaign_percent_bonus, start_date, end_date) VALUES(:commerce_id, :branch_id, :campaign_name, :campaign_type, :campaign_multiplier,:campaign_percent_bonus, :start_date, :end_date)", &campaign)
 
+	if err != nil {
+		return nil, fmt.Errorf("error saving campaign data: %v", err)
+	}
+
 	return &campaign, nil
 }
 
