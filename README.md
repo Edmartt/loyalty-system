@@ -68,8 +68,16 @@ sql-migrate status
 sql-migrate up
 ```
 
+#### note
+
 the above command will apply the migrations in chronological order based on the timestamp. If you want to apply only a specific version you must use the -version flag as follows:
 
 ```
 sql-migrate up -version 20240929193601
+```
+
+4. Run the project
+
+```
+go run cmd/main.go
 ```
