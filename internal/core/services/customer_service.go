@@ -5,21 +5,21 @@ import (
 	"github.com/Edmartt/loyalty-system/internal/core/ports"
 )
 
-type Service struct {
+type CustomerService struct {
 	customerRepository ports.Customers
 }
 
-func NewCustomerService(customerRepository ports.Customers) *Service {
-	return &Service{
+func NewCustomerService(customerRepository ports.Customers) *CustomerService {
+	return &CustomerService{
 		customerRepository: customerRepository,
 	}
 }
 
-func (s *Service) CreateUser(customer domain.Customer) (*domain.Customer, error) {
+func (s *CustomerService) CreateUser(customer domain.Customer) (*domain.Customer, error) {
 
 	return s.customerRepository.SaveCustomer(customer)
 }
 
-func (s *Service) GetUser(dni string) (*domain.Customer, error) {
+func (s *CustomerService) GetUser(dni string) (*domain.Customer, error) {
 	return s.customerRepository.ReadCustomer(dni)
 }
