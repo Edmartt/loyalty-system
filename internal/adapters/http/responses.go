@@ -1,6 +1,8 @@
 package http
 
-import "github.com/Edmartt/loyalty-system/internal/core/domain"
+import (
+	"github.com/Edmartt/loyalty-system/internal/adapters/http/dto"
+)
 
 type HttpResponse struct {
 	Response string `json:"response"`
@@ -8,5 +10,5 @@ type HttpResponse struct {
 
 type HttpCustomerCreated struct {
 	Message  string          `json:"message"`
-	Response domain.Customer `json:"customer"`
+	Response dto.CustomerDTO `json:"customer"`
 }
