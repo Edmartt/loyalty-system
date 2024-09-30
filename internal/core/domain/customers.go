@@ -4,7 +4,7 @@ package domain
 type Customer struct {
 	ID                string `db:"id"`
 	UserDNI           string `db:"user_dni"`
-	Name              string `db:"last_name"`
+	Name              string `db:"name"`
 	LastName          string `db:"last_name"`
 	Phone             string `db:"phone"`
 	Email             string `db:"email"`
