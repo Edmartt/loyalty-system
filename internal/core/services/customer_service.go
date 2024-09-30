@@ -6,20 +6,20 @@ import (
 )
 
 type CustomerService struct {
-	customerRepository ports.Customers
+	CustomerRepository ports.Customers
 }
 
 func NewCustomerService(customerRepository ports.Customers) *CustomerService {
 	return &CustomerService{
-		customerRepository: customerRepository,
+		CustomerRepository: customerRepository,
 	}
 }
 
 func (s *CustomerService) CreateUser(customer domain.Customer) (*domain.Customer, error) {
 
-	return s.customerRepository.SaveCustomer(customer)
+	return s.CustomerRepository.SaveCustomer(customer)
 }
 
 func (s *CustomerService) GetUser(dni string) (*domain.Customer, error) {
-	return s.customerRepository.ReadCustomer(dni)
+	return s.CustomerRepository.ReadCustomer(dni)
 }
