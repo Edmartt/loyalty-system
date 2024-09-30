@@ -14,7 +14,7 @@ func (c *CommerceService) CreateCommerce(commerce domain.Commerce) (*domain.Comm
 	return c.commerceRepository.SaveCommerce(commerce)
 }
 
-func (c *CommerceService) GetCommerceCampaign(campaignID string) (*domain.Campaign, error) {
+func (c *CommerceService) GetCommerceCampaign(campaignID string) (*domain.CommerceCampaign, error) {
 	return c.campaignRepository.ReadCommerceCampaign(campaignID)
 }
 
