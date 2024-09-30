@@ -11,22 +11,22 @@ type HTTPServer struct {
 }
 
 func (h HTTPServer) setRoutes(router *gin.RouterGroup) {
-	router.GET("/customers/:id", h.Handler.GetUser)
-	router.POST("/customers")
+	router.GET("/customers/:dni", h.Handler.GetUser)
+	router.POST("/customers", h.Handler.PostUser)
+	/*
+		router.POST("/commerces") //new commerce
+		router.GET("/commerces/:id/campaigns")
+		router.POST("/commerces/:id/campaigns")
 
-	router.POST("/commerces") //new commerce
-	router.GET("/commerces/:id/campaigns")
-	router.POST("/commerces/:id/campaigns")
+		router.POST("/branches") //new branch
+		router.GET("/branches/:id/campaigns")
+		router.POST("/branches/:id/campaigns")
 
-	router.POST("/branches") //new branch
-	router.GET("/branches/:id/campaigns")
-	router.POST("/branches/:id/campaigns")
+		router.GET("/commerces/:id") // for points x buy
+		router.POST("/commerces/")   // for updating points x buy
 
-	router.GET("/commerces/:id") // for points x buy
-	router.POST("/commerces/")   // for updating points x buy
-
-	router.GET("/commerces/:id") // for value x point
-	router.POST("/commerces/")   // for updating value x point
+		router.GET("/commerces/:id") // for value x point
+		router.POST("/commerces/")   // for updating value x point*/
 
 }
 
