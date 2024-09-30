@@ -33,3 +33,7 @@ func (c *CommerceService) SetCommercePointsXBuy(id string, commercePoint int32) 
 func (c *CommerceService) SetCommerceValueXPoint(id string, money int64) (string, error) {
 	return c.commerceRepository.SaveValueXPoint(id, money)
 }
+
+func (c *CommerceService) GetCommerceValueXPoint(id string) (*domain.Commerce, error) {
+	return c.commerceRepository.ReadValueXPoint(id)
+}
