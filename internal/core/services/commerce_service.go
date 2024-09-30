@@ -11,7 +11,7 @@ type CommerceService struct {
 }
 
 func (c *CommerceService) CreateCommerce(commerce domain.Commerce) (*domain.Commerce, error) {
-	return c.commerceRepository.CreateCommerce(commerce)
+	return c.commerceRepository.SaveCommerce(commerce)
 }
 
 func (c *CommerceService) GetCommerceCampaign(campaignID string) (*domain.Campaign, error) {
