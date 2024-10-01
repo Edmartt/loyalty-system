@@ -20,7 +20,7 @@ type HttpCommerceCreated struct {
 }
 
 type HttpCommerceCampaignOk struct {
-	Response []domain.CommerceCampaign `json:"response"`
+	Response []domain.CommerceCampaign `json:"campaigns"`
 }
 
 type HttpCampaignCreated struct {
