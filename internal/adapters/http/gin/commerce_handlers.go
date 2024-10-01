@@ -1,7 +1,6 @@
 package gin
 
 import (
-	"log"
 	"net/http"
 	"time"
 
@@ -120,7 +119,6 @@ func (c CommerceHandlers) PostCommerceCampaign(context *gin.Context) {
 	startDateString, err := time.Parse("2006-01-02", campaignDTO.StartDate)
 
 	if err != nil {
-		log.Println("start date", err.Error())
 		response.Response = "wrong date format"
 		context.JSON(http.StatusBadRequest, response)
 		return

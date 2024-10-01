@@ -32,3 +32,7 @@ type HttpBranchCreated struct {
 	Message  string        `json:"message"`
 	Response dto.BranchDTO `json:"branch"`
 }
+
+type HttpBranchCampaignOk struct {
+	Response []domain.BranchCampaign `json:"campaigns"`
+}

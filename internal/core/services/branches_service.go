@@ -21,7 +21,7 @@ func (b *BranchService) CreateBranch(branch domain.Branch) (*domain.Branch, erro
 	return b.branchRepository.CreateBranch(branch)
 }
 
-func (b *BranchService) GetBranchCampaign(id string) (*domain.BranchCampaign, error) {
+func (b *BranchService) GetBranchCampaign(id string) ([]domain.BranchCampaign, error) {
 	return b.campaignRepository.ReadBranchCampaign(id)
 }
 
