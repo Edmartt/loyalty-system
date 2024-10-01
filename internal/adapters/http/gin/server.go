@@ -12,6 +12,7 @@ type HTTPServer struct {
 	CustomerHandler CustomerHandlers
 	CommerceHandler CommerceHandlers
 	CampaignHandler CampaignHandlers
+	BranchHandler   BranchHandler
 }
 
 func (h HTTPServer) setRoutes(router *gin.RouterGroup) {
@@ -21,10 +22,11 @@ func (h HTTPServer) setRoutes(router *gin.RouterGroup) {
 	router.POST("/commerces", h.CommerceHandler.PostCommerce) //new commerce
 	router.GET("/commerces/:id/campaigns", h.CommerceHandler.GetCommerceCampaign)
 	router.POST("/commerces/:commerce_id/campaigns", h.CampaignHandler.PostCampaign) // campaigns related to whole commerce
+
+	router.POST("/branches", h.BranchHandler.PostBranch) //new branch
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	/*	router.POST("/commerces/:id/campaigns")
 
-		router.POST("/branches") //new branch
 		router.GET("/branches/:id/campaigns")
 		router.POST("/branches/:id/campaigns")
 
