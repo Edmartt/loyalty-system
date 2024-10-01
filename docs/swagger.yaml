@@ -1,0 +1,105 @@
+basePath: /api/v1
+definitions:
+  domain.Customer:
+    properties:
+      cashbackCollected:
+        type: number
+      email:
+        type: string
+      id:
+        type: string
+      lastName:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      pointsCollected:
+        type: number
+      userDNI:
+        type: string
+    type: object
+  dto.CustomerDTO:
+    properties:
+      email:
+        type: string
+      last_name:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      user_dni:
+        type: string
+    type: object
+  http.HttpCustomerCreated:
+    properties:
+      customer:
+        $ref: '#/definitions/dto.CustomerDTO'
+      message:
+        type: string
+    type: object
+  http.HttpResponse:
+    properties:
+      response:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Client for handling http requests for loyalty system
+  title: HTTP Client for Loyalty System
+  version: "1.0"
+paths:
+  /customers:
+    post:
+      consumes:
+      - application/json
+      description: Creates customers
+      parameters:
+      - description: Creates customer
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CustomerDTO'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/http.HttpCustomerCreated'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http.HttpResponse'
+      summary: Creates new customers
+      tags:
+      - Customers
+  /customers/{dni}:
+    get:
+      consumes:
+      - application/json
+      description: Through a get request the customer dni is sent to http client
+      parameters:
+      - description: Customer DNI
+        in: path
+        name: dni
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Customer'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/http.HttpResponse'
+      summary: Get customers from db using the system service layer
+      tags:
+      - Customers
+swagger: "2.0"

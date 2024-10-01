@@ -14,6 +14,22 @@ type CustomerHandlers struct {
 	CustomerService services.CustomerService
 }
 
+// @title		HTTP Client for Loyalty System
+// @version		1.0
+// @description	Client for handling http requests for loyalty system
+// @host		localhost:8080
+// @BasePath	/api/v1
+
+// GetUser godoc
+// @Summary      Get customers from db using the system service layer
+// @Description  Through a get request the customer dni is sent to http client
+// @Tags         Customers
+// @Accept       json
+// @Produce      json
+// @Param        dni   path      string  true  "Customer DNI"
+// @Success      200  {object}  domain.Customer
+// @Failure	 400 {object}  localHttp.HttpResponse
+// @Router       /customers/{dni} [get]
 func (c CustomerHandlers) GetUser(context *gin.Context) {
 
 	dni := context.Param("dni")
@@ -37,6 +53,16 @@ func (c CustomerHandlers) GetUser(context *gin.Context) {
 	context.JSON(http.StatusOK, customer)
 }
 
+// PostUser godoc
+// @Summary      Creates new customers
+// @Description  Creates customers
+// @Tags         Customers
+// @Accept       json
+// @Produce      json
+// @Param        person body dto.CustomerDTO true "Creates customer"
+// @Success      201  {object}  localHttp.HttpCustomerCreated
+// @Failure	 400 {object}  localHttp.HttpResponse
+// @Router       /customers [post]
 func (c CustomerHandlers) PostUser(context *gin.Context) {
 
 	customerDTO := dto.CustomerDTO{}

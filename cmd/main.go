@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	_ "github.com/Edmartt/loyalty-system/docs"
 	"github.com/Edmartt/loyalty-system/internal/adapters"
 	"github.com/Edmartt/loyalty-system/internal/adapters/database"
 	"github.com/Edmartt/loyalty-system/internal/adapters/http/gin"
