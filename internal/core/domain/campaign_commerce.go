@@ -3,9 +3,8 @@ package domain
 import "time"
 
 type CommerceCampaign struct {
-	CampaignID   string `json:"campaign_id" db:"campaign_id"`
-	CampaignName string `json:"campaign_name" db:"campaign_name"`
-	float64
+	CampaignID           string    `json:"campaign_id" db:"campaign_id"`
+	CampaignName         string    `json:"campaign_name" db:"campaign_name"`
 	CampaignMultiplier   float64   `json:"campaign_multiplier" db:"campaign_multiplier"`
 	CampaignPercentBonus float64   `json:"campaign_percent_bonus" db:"campaign_percent_bonus"`
 	StartDate            time.Time `json:"start_date" db:"start_date"`
