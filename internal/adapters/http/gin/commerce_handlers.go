@@ -42,6 +42,7 @@ func (c CommerceHandlers) PostCommerce(context *gin.Context) {
 	if err != nil {
 		response.Response = "error creating commerce: " + err.Error()
 		context.JSON(http.StatusBadRequest, response)
+		return
 	}
 
 	commerceDTO.ID = commerceResult.ID
@@ -52,4 +53,30 @@ func (c CommerceHandlers) PostCommerce(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, withObjectResponse)
+}
+
+func (c CommerceHandlers) GetCommerceCampaign(context *gin.Context) {
+	id := context.Param("id")
+
+	response := localHttp.HttpResponse{}
+
+	if id == "" {
+		response.Response = "empty id"
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	commerceCampaigns, err := c.CommerceService.GetCommerceCampaign(id)
+
+	if err != nil {
+		response.Response = "error fetching data with this id"
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	jsonCommerceCampaigns := localHttp.HttpCommerceCampaignOk{
+		Response: commerceCampaigns,
+	}
+
+	context.JSON(http.StatusOK, jsonCommerceCampaigns)
 }
