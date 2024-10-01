@@ -46,7 +46,7 @@ func (c *CommerceRepository) ReadPointsXBuy(id string) (*domain.Commerce, error)
 
 	var commerce domain.Commerce
 
-	err = dbConnection.Get(&commerce, "SELECT points_x_buy FROM commerce WHERE id=?", id)
+	err = dbConnection.Get(&commerce, "SELECT name, points_x_buy FROM commerce WHERE id=?", id)
 
 	if err != nil {
 		return nil, fmt.Errorf("error fetching commerce points: %v", err)
