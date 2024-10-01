@@ -42,12 +42,6 @@ func main() {
 		CommerceService: *commerceService,
 	}
 
-	campaignService := services.NewCampaignService(campaignRepository)
-
-	campaignHandlers := gin.CampaignHandlers{
-		CampaignService: *campaignService,
-	}
-
 	branchRepository := adapters.NewBranchRepository(pgConnection)
 	branchService := services.NewBranchService(branchRepository, campaignRepository)
 	branchHandler := gin.BranchHandler{
@@ -57,7 +51,6 @@ func main() {
 	httpServer := gin.HTTPServer{
 		CustomerHandler: customerHandler,
 		CommerceHandler: commerceHandlers,
-		CampaignHandler: campaignHandlers,
 		BranchHandler:   branchHandler,
 	}
 
