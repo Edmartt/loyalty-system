@@ -26,7 +26,7 @@ func (c *CustomersRepository) ReadCustomer(dni string) (*domain.Customer, error)
 		return nil, fmt.Errorf("error connecting to DB: %v", err)
 	}
 
-	err = dbConnection.Get(&customer, "SELECT user_dni, name, last_name, phone, email, points_collected, cashback_collected FROM customer WHERE dni=?", dni)
+	err = dbConnection.Get(&customer, "SELECT user_dni, name, last_name, phone, email, points_collected, cashback_collected FROM customer WHERE user_dni=$1", dni)
 	if err != nil {
 		return nil, fmt.Errorf("error fetching user data: %v", err)
 	}
