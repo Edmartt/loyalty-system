@@ -12,3 +12,8 @@ type HttpCustomerCreated struct {
 	Message  string          `json:"message"`
 	Response dto.CustomerDTO `json:"customer"`
 }
+
+type HttpCommerceCreated struct {
+	Message  string          `json:"message"`
+	Response dto.CommerceDTO `json:"commerce"`
+}
