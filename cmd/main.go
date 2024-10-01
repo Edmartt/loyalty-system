@@ -42,9 +42,16 @@ func main() {
 		CommerceService: *commerceService,
 	}
 
+	campaignService := services.NewCampaignService(campaignRepository)
+
+	campaignHandlers := gin.CampaignHandlers{
+		CampaignService: *campaignService,
+	}
+
 	httpServer := gin.HTTPServer{
 		CustomerHandler: customerHandler,
 		CommerceHandler: commerceHandlers,
+		CampaignHandler: campaignHandlers,
 	}
 
 	if err := httpServer.RunServer(os.Getenv("HTTP_PORT")); err != nil {

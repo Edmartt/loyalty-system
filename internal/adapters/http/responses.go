@@ -22,3 +22,8 @@ type HttpCommerceCreated struct {
 type HttpCommerceCampaignOk struct {
 	Response []domain.CommerceCampaign `json:"response"`
 }
+
+type HttpCampaignCreated struct {
+	Message  string          `json:"message"`
+	Response dto.CampaignDTO `json:"campaign"`
+}
