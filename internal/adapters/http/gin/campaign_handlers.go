@@ -14,7 +14,7 @@ import (
 )
 
 type CampaignHandlers struct {
-	CampaignService services.CampaignService
+	CommerceCampaignService services.CommerceService
 }
 
 func (c *CampaignHandlers) PostCampaign(context *gin.Context) {
@@ -68,7 +68,7 @@ func (c *CampaignHandlers) PostCampaign(context *gin.Context) {
 
 	campaign.EndDate = endDateString
 
-	campaignResult, err := c.CampaignService.CreateCampaign(campaign)
+	campaignResult, err := c.CommerceCampaignService.SetCommerceCampaign(campaign)
 
 	if err != nil {
 		response.Response = "error creating campaign"
