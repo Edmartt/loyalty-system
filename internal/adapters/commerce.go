@@ -18,7 +18,7 @@ func NewCommerceRepository(dbConnection ports.IConnection) *CommerceRepository {
 	}
 }
 
-func (c *CommerceRepository) SaveCommerce(domain.Commerce) (*domain.Commerce, error) {
+func (c *CommerceRepository) SaveCommerce(commerce domain.Commerce) (*domain.Commerce, error) {
 	dbConnection, err := c.dbConnection.GetConnection()
 
 	commerceID := uuid.NewString()
@@ -34,7 +34,7 @@ func (c *CommerceRepository) SaveCommerce(domain.Commerce) (*domain.Commerce, er
 		return nil, fmt.Errorf("error saving data: %v", err)
 	}
 
-	return &domain.Commerce{}, nil
+	return &commerce, nil
 }
 
 func (c *CommerceRepository) ReadPointsXBuy(id string) (*domain.Commerce, error) {
