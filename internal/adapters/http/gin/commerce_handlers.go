@@ -1,0 +1,55 @@
+package gin
+
+import (
+	"net/http"
+
+	localHttp "github.com/Edmartt/loyalty-system/internal/adapters/http"
+	"github.com/Edmartt/loyalty-system/internal/adapters/http/dto"
+	"github.com/Edmartt/loyalty-system/internal/core/domain"
+	"github.com/Edmartt/loyalty-system/internal/core/services"
+	"github.com/gin-gonic/gin"
+)
+
+type CommerceHandlers struct {
+	CommerceService services.CommerceService
+}
+
+func (c CommerceHandlers) PostCommerce(context *gin.Context) {
+
+	commerceDTO := dto.CommerceDTO{}
+	response := localHttp.HttpResponse{}
+
+	err := context.BindJSON(&commerceDTO)
+
+	if err != nil {
+		response.Response = "invalid request: " + err.Error()
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	if commerceDTO.Name == "" {
+		response.Response = "missing required information"
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	commerce := domain.Commerce{
+		Name: commerceDTO.Name,
+	}
+
+	commerceResult, err := c.CommerceService.CreateCommerce(commerce)
+
+	if err != nil {
+		response.Response = "error creating commerce: " + err.Error()
+		context.JSON(http.StatusBadRequest, response)
+	}
+
+	commerceDTO.ID = commerceResult.ID
+
+	withObjectResponse := localHttp.HttpCommerceCreated{
+		Message:  "commerce created successfully",
+		Response: commerceDTO,
+	}
+
+	context.JSON(http.StatusOK, withObjectResponse)
+}
