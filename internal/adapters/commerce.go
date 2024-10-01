@@ -28,7 +28,7 @@ func (c *CommerceRepository) SaveCommerce(commerce domain.Commerce) (*domain.Com
 		return nil, fmt.Errorf("error connecting to DB: %v", err)
 	}
 
-	_, err = dbConnection.NamedExec("INSERT INTO commerce (name, points_x_buy, value_x_point) VALUES(:name, :points_x_buy, :value_x_point)", &domain.Commerce{})
+	_, err = dbConnection.NamedExec("INSERT INTO commerce (id, name, points_x_buy, value_x_point) VALUES(:id, :name, :points_x_buy, :value_x_point)", commerce)
 
 	if err != nil {
 		return nil, fmt.Errorf("error saving data: %v", err)
