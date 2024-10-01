@@ -16,8 +16,7 @@ func (h HTTPServer) setRoutes(router *gin.RouterGroup) {
 	router.POST("/customers", h.CustomerHandler.PostUser)
 
 	router.POST("/commerces", h.CommerceHandler.PostCommerce) //new commerce
-	/*router.GET("/commerces/:id/campaigns")
-	router.POST("/commerces/:id/campaigns")
+	router.GET("/commerces/:id/campaigns", h.CommerceHandler.GetCommerceCampaign)
 
 	router.POST("/branches") //new branch
 	router.GET("/branches/:id/campaigns")
