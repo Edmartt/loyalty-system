@@ -10,6 +10,13 @@ type BranchService struct {
 	branchRepository   ports.Branch
 }
 
+func NewBranchService(branch ports.Branch, repository ports.Campaign) *BranchService {
+	return &BranchService{
+		campaignRepository: repository,
+		branchRepository:   branch,
+	}
+}
+
 func (b *BranchService) CreateBranch(branch domain.Branch) (*domain.Branch, error) {
 	return b.branchRepository.CreateBranch(branch)
 }

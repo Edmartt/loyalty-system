@@ -27,3 +27,8 @@ type HttpCampaignCreated struct {
 	Message  string          `json:"message"`
 	Response dto.CampaignDTO `json:"campaign"`
 }
+
+type HttpBranchCreated struct {
+	Message  string        `json:"message"`
+	Response dto.BranchDTO `json:"branch"`
+}

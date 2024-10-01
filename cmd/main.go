@@ -48,10 +48,17 @@ func main() {
 		CampaignService: *campaignService,
 	}
 
+	branchRepository := adapters.NewBranchRepository(pgConnection)
+	branchService := services.NewBranchService(branchRepository, campaignRepository)
+	branchHandler := gin.BranchHandler{
+		BranchService: *branchService,
+	}
+
 	httpServer := gin.HTTPServer{
 		CustomerHandler: customerHandler,
 		CommerceHandler: commerceHandlers,
 		CampaignHandler: campaignHandlers,
+		BranchHandler:   branchHandler,
 	}
 
 	if err := httpServer.RunServer(os.Getenv("HTTP_PORT")); err != nil {
