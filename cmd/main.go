@@ -33,8 +33,17 @@ func main() {
 		CustomerService: *customerService,
 	}
 
+	commerceRepository := adapters.NewCommerceRepository(pgConnection)
+	campaignRepository := adapters.NewCampaignRepository(pgConnection)
+
+	commerceService := services.NewCommerceService(commerceRepository, campaignRepository)
+	commerceHandlers := gin.CommerceHandlers{
+		CommerceService: *commerceService,
+	}
+
 	httpServer := gin.HTTPServer{
-		Handler: customerHandler,
+		CustomerHandler: customerHandler,
+		CommerceHandler: commerceHandlers,
 	}
 
 	if err := httpServer.RunServer(os.Getenv("HTTP_PORT")); err != nil {
