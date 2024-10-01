@@ -8,6 +8,7 @@ import (
 	"github.com/Edmartt/loyalty-system/internal/core/domain"
 	"github.com/Edmartt/loyalty-system/internal/core/services"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 type CommerceHandlers struct {
@@ -18,6 +19,7 @@ func (c CommerceHandlers) PostCommerce(context *gin.Context) {
 
 	commerceDTO := dto.CommerceDTO{}
 	response := localHttp.HttpResponse{}
+	commerceID := uuid.NewString()
 
 	err := context.BindJSON(&commerceDTO)
 
@@ -34,6 +36,7 @@ func (c CommerceHandlers) PostCommerce(context *gin.Context) {
 	}
 
 	commerce := domain.Commerce{
+		ID:   commerceID,
 		Name: commerceDTO.Name,
 	}
 
@@ -52,7 +55,7 @@ func (c CommerceHandlers) PostCommerce(context *gin.Context) {
 		Response: commerceDTO,
 	}
 
-	context.JSON(http.StatusOK, withObjectResponse)
+	context.JSON(http.StatusCreated, withObjectResponse)
 }
 
 func (c CommerceHandlers) GetCommerceCampaign(context *gin.Context) {
