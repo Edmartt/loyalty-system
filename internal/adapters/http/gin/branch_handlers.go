@@ -59,3 +59,34 @@ func (b *BranchHandler) PostBranch(context *gin.Context) {
 	context.JSON(http.StatusCreated, withObjectResponse)
 
 }
+
+func (b *BranchHandler) GetBranchCampaign(context *gin.Context) {
+
+	id := context.Param("id")
+
+	response := localHttp.HttpResponse{}
+
+	if id == "" {
+		response.Response = "empty id"
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	branchCampaigns, err := b.BranchService.GetBranchCampaign(id)
+
+	if err != nil {
+		response.Response = "error fetching data with this id" + err.Error()
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	jsonBranchCampaigns := localHttp.HttpBranchCampaignOk{
+		Response: branchCampaigns,
+	}
+
+	context.JSON(http.StatusOK, jsonBranchCampaigns)
+}
+
+func (b *BranchHandler) CreateBranchCampaign(context *gin.Context) {
+
+}
