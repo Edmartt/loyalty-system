@@ -4,6 +4,8 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type HTTPServer struct {
@@ -17,6 +19,7 @@ func (h HTTPServer) setRoutes(router *gin.RouterGroup) {
 
 	router.POST("/commerces", h.CommerceHandler.PostCommerce) //new commerce
 	router.GET("/commerces/:id/campaigns", h.CommerceHandler.GetCommerceCampaign)
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	/*	router.POST("/commerces/:id/campaigns")
 
 		router.POST("/branches") //new branch
