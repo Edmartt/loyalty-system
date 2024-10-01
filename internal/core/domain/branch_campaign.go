@@ -3,10 +3,14 @@ package domain
 import "time"
 
 type BranchCampaign struct {
-	CampaignID           string    `json:"campaign_id" db:"campaign_id"`
-	CampaignName         string    `json:"campaign_name" db:"campaign_name"`
-	CampaignMultiplier   int       `json:"campaign_multiplier" db:"campaign_multiplier"`
-	CampaignPercentBonus int       `json:"campaign_percent_bonus" db:"campaign_percent_bonus"`
+	CampaignID   string `json:"campaign_id" db:"campaign_id"`
+	CampaignName string `json:"campaign_name" db:"campaign_name"`
+
+	CampaignMultiplier float64 `json:"campaign_multiplier" db:"campaign_multiplier"`
+
+	CampaignPercentBonus float64   `json:"campaign_percent_bonus" db:"campaign_percent_bonus"`
+	PointsXBuy           float64   `json:"points_x_buy" db:"points_x_buy"`
+	ValueXPoint          float64   `json:"value_x_point" db:"value_x_point"`
 	StartDate            time.Time `json:"start_date" db:"start_date"`
 	EndDate              time.Time `json:"end_date" db:"end_date"`
 	BranchID             string    `json:"branch_id" db:"branch_id"`
