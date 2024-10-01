@@ -5,7 +5,6 @@ import (
 
 	"github.com/Edmartt/loyalty-system/internal/core/domain"
 	ports "github.com/Edmartt/loyalty-system/internal/core/ports/database"
-	"github.com/google/uuid"
 )
 
 type CommerceRepository struct {
@@ -20,9 +19,6 @@ func NewCommerceRepository(dbConnection ports.IConnection) *CommerceRepository {
 
 func (c *CommerceRepository) SaveCommerce(commerce domain.Commerce) (*domain.Commerce, error) {
 	dbConnection, err := c.dbConnection.GetConnection()
-
-	commerceID := uuid.NewString()
-	commerce.ID = commerceID
 
 	if err != nil {
 		return nil, fmt.Errorf("error connecting to DB: %v", err)
