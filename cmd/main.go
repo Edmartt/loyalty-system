@@ -35,15 +35,14 @@ func main() {
 	}
 
 	commerceRepository := adapters.NewCommerceRepository(pgConnection)
-	campaignRepository := adapters.NewCampaignRepository(pgConnection)
 
-	commerceService := services.NewCommerceService(commerceRepository, campaignRepository)
+	commerceService := services.NewCommerceService(commerceRepository)
 	commerceHandlers := gin.CommerceHandlers{
 		CommerceService: *commerceService,
 	}
 
 	branchRepository := adapters.NewBranchRepository(pgConnection)
-	branchService := services.NewBranchService(branchRepository, campaignRepository)
+	branchService := services.NewBranchService(branchRepository)
 	branchHandler := gin.BranchHandler{
 		BranchService: *branchService,
 	}
