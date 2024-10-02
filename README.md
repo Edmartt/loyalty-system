@@ -17,6 +17,10 @@ Loyalty system is a system that implements a solution for the following requirem
 
 ![](https://github.com/Edmartt/loyalty-system/blob/dev/assets/structure.png)
 
+## ER Diagram
+
+![](https://github.com/Edmartt/loyalty-system/blob/dev/assets/schemeER.png)
+
 ## Requirements
 
 - Go 1.19+
