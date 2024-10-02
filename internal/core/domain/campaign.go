@@ -10,8 +10,8 @@ type Campaign struct {
 	BranchID             string    `db:"branch_id"`
 	CampaignName         string    `db:"campaign_name"`
 	CampaignType         string    `db:"campaign_type"` //points or casback
-	CampaignMultiplier   int32     `db:"campaign_multiplier"`
-	CampaignPercentBonus int16     `db:"campaign_percent_bonus"`
+	CampaignMultiplier   float64   `db:"campaign_multiplier"`
+	CampaignPercentBonus float64   `db:"campaign_percent_bonus"`
 	StartDate            time.Time `db:"start_date"`
 	EndDate              time.Time `db:"end_date"`
 }
