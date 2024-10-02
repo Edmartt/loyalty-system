@@ -2,15 +2,22 @@
 
 Loyalty system is a system that implements a solution for the following requirements
 
-- Configure campaigns for a store and branches.
+- Hexagonal Architecture
+
+- Set campaigns for a store and branches.
 
 - Query campaigns for a store and branches.
 
 - Accumulate points or cashback if the store and branch has a campaign configured.
  
-- Redeem points or cashback in a store (optional).
+- Redeem points or cashback in a store.
 
-## Requierements
+
+## Project Structure
+
+![](https://github.com/Edmartt/loyalty-system/blob/dev/assets/structure.png)
+
+## Requirements
 
 - Go 1.19+
 - SQLite
