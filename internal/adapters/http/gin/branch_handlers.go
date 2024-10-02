@@ -2,6 +2,7 @@ package gin
 
 import (
 	"net/http"
+	"time"
 
 	localHttp "github.com/Edmartt/loyalty-system/internal/adapters/http"
 	"github.com/Edmartt/loyalty-system/internal/adapters/http/dto"
@@ -75,7 +76,7 @@ func (b *BranchHandler) GetBranchCampaign(context *gin.Context) {
 	branchCampaigns, err := b.BranchService.GetBranchCampaign(id)
 
 	if err != nil {
-		response.Response = "error fetching data with this id" + err.Error()
+		response.Response = "error fetching data with this id: " + err.Error()
 		context.JSON(http.StatusBadRequest, response)
 		return
 	}
@@ -89,4 +90,70 @@ func (b *BranchHandler) GetBranchCampaign(context *gin.Context) {
 
 func (b *BranchHandler) CreateBranchCampaign(context *gin.Context) {
 
+	branchCampaignDTO := dto.BranchCampaign{}
+	response := localHttp.HttpResponse{}
+	campaignID := uuid.NewString()
+
+	err := context.BindJSON(&branchCampaignDTO)
+
+	if err != nil {
+		response.Response = "invalid request: " + err.Error()
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	if branchCampaignDTO.BranchID == "" || branchCampaignDTO.CampaignName == "" || branchCampaignDTO.StartDate == "" || branchCampaignDTO.EndDate == "" {
+
+		response.Response = "missing required information"
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+	branchCampaignDTO.CampaignID = campaignID
+
+	campaign := domain.Campaign{
+		ID:                   branchCampaignDTO.CampaignID,
+		CommerceID:           branchCampaignDTO.CommerceID,
+		BranchID:             branchCampaignDTO.BranchID,
+		CampaignName:         branchCampaignDTO.CampaignName,
+		CampaignType:         branchCampaignDTO.CampaignType,
+		CampaignMultiplier:   branchCampaignDTO.CampaignMultiplier,
+		CampaignPercentBonus: branchCampaignDTO.CampaignPercentBonus,
+	}
+
+	startDateString, err := time.Parse("2006-01-02", branchCampaignDTO.StartDate)
+
+	if err != nil {
+		response.Response = "wrong date format"
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	campaign.StartDate = startDateString
+
+	endDateString, err := time.Parse("2006-01-02", branchCampaignDTO.EndDate)
+
+	if err != nil {
+		response.Response = "wrong date format"
+		context.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	campaign.EndDate = endDateString
+
+	_, err = b.BranchService.CreateBranchCampaign(campaign)
+
+	if err != nil {
+		response.Response = "error creating campaign"
+		context.JSON(http.StatusInternalServerError, response)
+		return
+	}
+
+	//branchCampaignDTO.ID = campaignResult.ID
+
+	withObjectResponse := localHttp.HttpBranchCampaignCreated{
+		Message:  "created",
+		Response: branchCampaignDTO,
+	}
+
+	context.JSON(http.StatusCreated, withObjectResponse)
 }
