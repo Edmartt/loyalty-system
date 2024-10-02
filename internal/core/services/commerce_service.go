@@ -7,13 +7,11 @@ import (
 
 type CommerceService struct {
 	CommerceRepository ports.Commerce
-	CampaignRepository ports.Campaign
 }
 
-func NewCommerceService(commerceRepository ports.Commerce, campaignRepository ports.Campaign) *CommerceService {
+func NewCommerceService(commerceRepository ports.Commerce) *CommerceService {
 	return &CommerceService{
 		CommerceRepository: commerceRepository,
-		CampaignRepository: campaignRepository,
 	}
 }
 
@@ -21,12 +19,12 @@ func (c *CommerceService) CreateCommerce(commerce domain.Commerce) (*domain.Comm
 	return c.CommerceRepository.SaveCommerce(commerce)
 }
 
-func (c *CommerceService) GetCommerceCampaign(campaignID string) ([]domain.CommerceCampaign, error) {
-	return c.CampaignRepository.ReadCommerceCampaign(campaignID)
+func (c *CommerceService) GetCommerceCampaign(campaignID string) ([]domain.Campaign, error) {
+	return c.CommerceRepository.ReadCommerceCampaign(campaignID)
 }
 
 func (c *CommerceService) SetCommerceCampaign(campaign domain.Campaign) (*domain.Campaign, error) {
-	return c.CampaignRepository.SaveCampaign(campaign)
+	return c.CommerceRepository.CreateCommerceCampaign(campaign)
 }
 
 func (c *CommerceService) GetCommercePointsXBuy(id string) (*domain.Commerce, error) {
