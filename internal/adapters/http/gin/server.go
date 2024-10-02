@@ -26,13 +26,13 @@ func (h HTTPServer) setRoutes(router *gin.RouterGroup) {
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	router.GET("/branches/:id/campaigns", h.BranchHandler.GetBranchCampaign)
-	/*	router.POST("/branches/:id/campaigns")
+	router.POST("/branches/:id/campaigns", h.BranchHandler.CreateBranchCampaign)
 
-		router.GET("/commerces/:id") // for points x buy
-		router.POST("/commerces/")   // for updating points x buy
+	/*router.GET("/commerces/:id") // for points x buy
+	router.POST("/commerces/")   // for updating points x buy
 
-		router.GET("/commerces/:id") // for value x point
-		router.POST("/commerces/")   // for updating value x point*/
+	router.GET("/commerces/:id") // for value x point
+	router.POST("/commerces/")   // for updating value x point*/
 
 }
 
